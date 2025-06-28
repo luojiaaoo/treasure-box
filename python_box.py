@@ -1,5 +1,13 @@
+'''
+@Project : treasure-box 
+@File    : python_box.py
+@Author  : luojiaaoo
+@Page    : https://github.com/luojiaaoo
+@Link    : https://github.com/luojiaaoo/treasure-box
+'''
+
 """
-用于在Python里进行C的移位/与/或/非操作
+// 用于在Python里进行C的移位/与/或/非操作
 """
 import ctypes
 from typing import Generic, TypeVar, Type
@@ -56,7 +64,7 @@ for _ in range(1000):
         print(f"Success: {a} == {b}, list_uint8={list_uint8}")
 
 """
-异常重试装饰器
+// 异常重试装饰器
 """
 from functools import wraps
 from time import sleep
@@ -91,8 +99,7 @@ def retry(exceptions: Tuple[Exception], retries: int = 3, delay: float = 1):
 
 
 """
-每60秒瞬间切换大小写
-保证电脑不休眠线程
+// 每60秒瞬间切换大小写，保证电脑不休眠线程
 """
 import os
 import threading
