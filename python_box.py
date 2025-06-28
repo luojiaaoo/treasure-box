@@ -6,9 +6,8 @@
 @Link    : https://github.com/luojiaaoo/treasure-box
 '''
 
-"""
-// 用于在Python里进行C的移位/与/或/非操作
-"""
+info = """用于在Python里进行C的移位/与/或/非操作"""
+
 import ctypes
 from typing import Generic, TypeVar, Type
 
