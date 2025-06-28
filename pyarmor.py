@@ -1,3 +1,11 @@
+'''
+@Project : treasure-box 
+@File    : pyarmor.py
+@Author  : luojiaaoo
+@Page    : https://github.com/luojiaaoo
+@Link    : https://github.com/luojiaaoo/treasure-box
+'''
+
 import argparse
 import os
 import re
