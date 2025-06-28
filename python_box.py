@@ -5,9 +5,9 @@
 @Page    : https://github.com/luojiaaoo
 @Link    : https://github.com/luojiaaoo/treasure-box
 '''
-
-info = """用于在Python里进行C的移位/与/或/非操作"""
-
+####################################################
+ANNOTATION = """用于在Python里进行C的移位/与/或/非操作"""
+####################################################
 import ctypes
 from typing import Generic, TypeVar, Type
 
@@ -62,9 +62,10 @@ for _ in range(1000):
     else:
         print(f"Success: {a} == {b}, list_uint8={list_uint8}")
 
-"""
-// 异常重试装饰器
-"""
+#############################
+ANNOTATION = """异常重试装饰器"""
+#############################
+
 from functools import wraps
 from time import sleep
 from typing import Tuple
@@ -97,9 +98,10 @@ def retry(exceptions: Tuple[Exception], retries: int = 3, delay: float = 1):
     return decorator
 
 
-"""
-// 每60秒瞬间切换大小写，保证电脑不休眠线程
-"""
+####################################################
+ANNOTATION = """每60秒瞬间切换大小写，保证电脑不休眠线程"""
+####################################################
+
 import os
 import threading
 import time
