@@ -72,9 +72,9 @@ for _ in range(1000):
         | np.uint32(list_uint8[2]) >> np.uint32(8) & np.uint32(list_uint8[3])
     )
     b = (
-        CUInt(list_uint8[0], ctypes.c_uint32) << 24
-        | ~CUInt(list_uint8[1], ctypes.c_uint32) << 16
-        | CUInt(list_uint8[2], ctypes.c_uint32) >> 8 & CUInt(list_uint8[3], ctypes.c_uint32)
+        CUInt(list_uint8[0], c_uint32) << 24
+        | ~CUInt(list_uint8[1], c_uint32) << 16
+        | CUInt(list_uint8[2], c_uint32) >> 8 & CUInt(list_uint8[3], c_uint32)
     ).value()
     if a != b:
         raise ValueError(f"Error: {a} != {b}, list_uint8={list_uint8}")
