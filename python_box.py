@@ -6,6 +6,21 @@
 @Link    : https://github.com/luojiaaoo/treasure-box
 '''
 ####################################################
+ANNOTATION = """类的懒加载"""
+####################################################
+from importlib import import_module
+
+class LazyImport:
+    def __init__(self, module_name):
+        self._module_name = module_name
+        self._module = None
+
+    def __getattr__(self, attr):
+        if self._module is None:
+            self._module = import_module(self._module_name)
+        return getattr(self._module, attr)
+
+####################################################
 ANNOTATION = """用于在Python里进行C的移位/与/或/非操作"""
 ####################################################
 from ctypes import c_uint8, c_uint16, c_uint32, _SimpleCData
@@ -34,6 +49,20 @@ class CUInt(Generic[T]):
 
     def __lshift__(self, bit_count: int):
         return CUInt(self.value << bit_count, self.type_c_uint)
+    
+    def __add__(self, cuint: "CUInt[T]"):
+        if cuint.type_c_uint != self.type_c_uint:
+            raise ValueError(
+                f"Error: type_c_uint is not equal, type_c_uint={self.type_c_uint}, cuint.type_c_uint={cuint.type_c_uint}"
+            )
+        return CUInt(self.value + cuint.value, self.type_c_uint)
+    
+    def __sub__(self, cuint: "CUInt[T]"):
+        if cuint.type_c_uint != self.type_c_uint:
+            raise ValueError(
+                f"Error: type_c_uint is not equal, type_c_uint={self.type_c_uint}, cuint.type_c_uint={cuint.type_c_uint}"
+            )
+        return CUInt(self.value - cuint.value, self.type_c_uint)
 
     def __and__(self, cuint: "CUInt[T]"):
         if cuint.type_c_uint != self.type_c_uint:
