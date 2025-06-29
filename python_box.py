@@ -25,6 +25,9 @@ class CUInt(Generic[T]):
     def value(self):
         return self.data.value
 
+    def __int__(self):
+        return self.value()
+
     def __rshift__(self, bit_count: int):
         return CUInt(self.value() >> bit_count, self.type_c_uint)
 
