@@ -8,10 +8,10 @@
 ####################################################
 ANNOTATION = """用于在Python里进行C的移位/与/或/非操作"""
 ####################################################
-import ctypes
+from ctypes import c_uint8, c_uint16, c_uint32, _SimpleCData
 from typing import Generic, TypeVar, Type
 
-T = TypeVar("T", bound=ctypes._SimpleCData)
+T = TypeVar("T", bound=_SimpleCData)
 
 
 class CUInt(Generic[T]):
@@ -36,10 +36,25 @@ class CUInt(Generic[T]):
         return CUInt(self.value << bit_count, self.type_c_uint)
 
     def __and__(self, cuint: "CUInt[T]"):
-        return CUInt(self.value & cuint.value(), self.type_c_uint)
+        if cuint.type_c_uint != self.type_c_uint:
+            raise ValueError(
+                f"Error: type_c_uint is not equal, type_c_uint={self.type_c_uint}, cuint.type_c_uint={cuint.type_c_uint}"
+            )
+        return CUInt(self.value & cuint.value, self.type_c_uint)
 
     def __or__(self, cuint: "CUInt[T]"):
-        return CUInt(self.value | cuint.value(), self.type_c_uint)
+        if cuint.type_c_uint != self.type_c_uint:
+            raise ValueError(
+                f"Error: type_c_uint is not equal, type_c_uint={self.type_c_uint}, cuint.type_c_uint={cuint.type_c_uint}"
+            )
+        return CUInt(self.value | cuint.value, self.type_c_uint)
+
+    def __xor__(self, cuint: "CUInt[T]"):
+        if cuint.type_c_uint != self.type_c_uint:
+            raise ValueError(
+                f"Error: type_c_uint is not equal, type_c_uint={self.type_c_uint}, cuint.type_c_uint={cuint.type_c_uint}"
+            )
+        return CUInt(self.value ^ cuint.value, self.type_c_uint)
 
     def __invert__(self):
         return CUInt(~self.value, self.type_c_uint)
