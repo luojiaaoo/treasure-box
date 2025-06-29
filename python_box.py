@@ -20,28 +20,29 @@ class CUInt(Generic[T]):
         self.data = self.type_c_uint(value)
 
     def type_to(self, type_c_uint: Type[T]):
-        return CUInt(self.value(), type_c_uint)
+        return CUInt(self.value, type_c_uint)
 
+    @property
     def value(self):
         return self.data.value
 
     def __int__(self):
-        return self.value()
+        return self.value
 
     def __rshift__(self, bit_count: int):
-        return CUInt(self.value() >> bit_count, self.type_c_uint)
+        return CUInt(self.value >> bit_count, self.type_c_uint)
 
     def __lshift__(self, bit_count: int):
-        return CUInt(self.value() << bit_count, self.type_c_uint)
+        return CUInt(self.value << bit_count, self.type_c_uint)
 
     def __and__(self, cuint: "CUInt[T]"):
-        return CUInt(self.value() & cuint.value(), self.type_c_uint)
+        return CUInt(self.value & cuint.value(), self.type_c_uint)
 
     def __or__(self, cuint: "CUInt[T]"):
-        return CUInt(self.value() | cuint.value(), self.type_c_uint)
-    
+        return CUInt(self.value | cuint.value(), self.type_c_uint)
+
     def __invert__(self):
-        return CUInt(~self.value(), self.type_c_uint)
+        return CUInt(~self.value, self.type_c_uint)
 
 
 import numpy as np
